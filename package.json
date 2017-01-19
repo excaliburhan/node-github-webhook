@@ -1,6 +1,6 @@
 {
   "name": "node-github-webhook",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Github Webhooks handler based on Node.js. Support multiple handlers.",
   "main": "index.js",
   "scripts": {

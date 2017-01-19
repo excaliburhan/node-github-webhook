@@ -39,6 +39,7 @@ function create(options) {
         if (url.split('?').shift() === arr[i].path)
           ret = arr[i]
       }
+      console.log(ret)
       return ret
     }
 
@@ -56,19 +57,22 @@ function create(options) {
         throw new TypeError('must provide an events array')
     }
 
+    var currentOptions
     if (Array.isArray(options)) {
-      options = findHandler(req.url, options)
+      currentOptions = findHandler(req.url, options)
+    } else {
+      currentOptions = options
     }
 
-    checkType(options)
+    checkType(currentOptions)
 
-    if (req.url.split('?').shift() !== options.path)
+    if (req.url.split('?').shift() !== currentOptions.path)
       return callback()
     
     var sig = req.headers['x-hub-signature']
     var event = req.headers['x-github-event']
     var id = req.headers['x-github-delivery']
-    var events = options.events
+    var events = currentOptions.events
 
     if (!sig)
       return hasError('No X-Hub-Signature found on request')
@@ -87,7 +91,7 @@ function create(options) {
         return hasError(err.message)
 
       var obj
-      var computedSig = new Buffer(signBlob(options.secret, data))
+      var computedSig = new Buffer(signBlob(currentOptions.secret, data))
 
       if (!bufferEq(new Buffer(sig), computedSig))
         return hasError('X-Hub-Signature does not match blob signature')
@@ -108,7 +112,7 @@ function create(options) {
         protocol: req.protocol,
         host: req.headers['host'],
         url: req.url,
-        path: options.path
+        path: currentOptions.path
       }
 
       handler.emit(event, emitData)

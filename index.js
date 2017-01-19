@@ -16,6 +16,15 @@ function isObject(obj) {
   return Object.prototype.toString.apply(obj) === '[object Object]'
 }
 
+function findHandler(url, arr) {
+  var ret = arr[0]
+  for (var i = 0; i < arr.length; i++) {
+    if (url.split('?').shift() === arr[i].path)
+      ret = arr[i]
+  }
+  return ret
+}
+
 function create(options) {
   // make it an EventEmitter, sort of
   handler.__proto__ = EventEmitter.prototype
@@ -31,16 +40,6 @@ function create(options) {
       var err = new Error(msg)
       handler.emit('error', err, req)
       callback(err)
-    }
-
-    function findHandler(url, arr) {
-      var ret = arr[0]
-      for (var i = 0; i < arr.length; i++) {
-        if (url.split('?').shift() === arr[i].path)
-          ret = arr[i]
-      }
-      console.log(ret)
-      return ret
     }
 
     function checkType(options) {

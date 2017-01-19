@@ -17,31 +17,6 @@ function isObject(obj) {
 }
 
 function create(options) {
-  function findHandler(url, arr) {
-    var ret = arr[0]
-    for (var i = 0; i < arr.length; i++) {
-      if (url.split('?').shift() === arr[i].path)
-        ret = arr[i]
-    }
-    return ret
-  }
-
-  if (Array.isArray(options)) {
-    options = findHandler(req.url, options)
-  }
-
-  if (!isObject(options))
-      throw new TypeError('must provide an options object')
-
-  if (typeof options.path !== 'string')
-    throw new TypeError('must provide a \'path\' option')
-  
-  if (typeof options.secret !== 'string')
-    throw new TypeError('must provide a \'secret\' option')
-  
-  if (Array.isArray(options.events) && options.events.indexOf('*') === -1)
-    throw new TypeError('must provide an events array')
-
   // make it an EventEmitter, sort of
   handler.__proto__ = EventEmitter.prototype
   EventEmitter.call(handler)
@@ -57,6 +32,35 @@ function create(options) {
       handler.emit('error', err, req)
       callback(err)
     }
+
+    function findHandler(url, arr) {
+      var ret = arr[0]
+      for (var i = 0; i < arr.length; i++) {
+        if (url.split('?').shift() === arr[i].path)
+          ret = arr[i]
+      }
+      return ret
+    }
+
+    function checkType(options) {
+      if (!isObject(options))
+          throw new TypeError('must provide an options object')
+
+      if (typeof options.path !== 'string')
+        throw new TypeError('must provide a \'path\' option')
+      
+      if (typeof options.secret !== 'string')
+        throw new TypeError('must provide a \'secret\' option')
+      
+      if (Array.isArray(options.events) && options.events.indexOf('*') === -1)
+        throw new TypeError('must provide an events array')
+    }
+
+    if (Array.isArray(options)) {
+      options = findHandler(req.url, options)
+    }
+
+    checkType(options)
 
     if (req.url.split('?').shift() !== options.path)
       return callback()

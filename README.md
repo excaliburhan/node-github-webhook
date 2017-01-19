@@ -9,6 +9,8 @@ It is a small tool based on Node.js to help you handler all the logic for receiv
 
 If you want to know the events of Github, please see: [events](https://developer.github.com/webhooks/#events).
 
+Notice: Github Webhooks setting: `Content-type` must be `application/json`.
+
 ### Usage
 
 ```js

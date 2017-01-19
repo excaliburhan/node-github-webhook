@@ -95,7 +95,8 @@ function create(options) {
         payload: obj,
         protocol: req.protocol,
         host: req.headers['host'],
-        url: req.url
+        url: req.url,
+        path: options.path
       }
 
       handler.emit(event, emitData)

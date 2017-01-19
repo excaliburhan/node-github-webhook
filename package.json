@@ -1,0 +1,24 @@
+{
+  "name": "node-github-webhook",
+  "version": "1.0.0",
+  "description": "Github Webhooks handler based on Node.js. Support multiple handlers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/excaliburhan/node-github-webhook.git"
+  },
+  "keywords": [
+    "Github",
+    "Webhooks",
+    "Node.js"
+  ],
+  "author": "xiaoping",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/excaliburhan/node-github-webhook/issues"
+  },
+  "homepage": "https://github.com/excaliburhan/node-github-webhook#readme"
+}

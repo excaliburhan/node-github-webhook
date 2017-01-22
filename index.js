@@ -51,9 +51,6 @@ function create(options) {
       
       if (typeof options.secret !== 'string')
         throw new TypeError('must provide a \'secret\' option')
-      
-      if (Array.isArray(options.events) && options.events.indexOf('*') === -1)
-        throw new TypeError('must provide an events array')
     }
 
     var currentOptions
@@ -82,7 +79,7 @@ function create(options) {
     if (!id)
       return hasError('No X-Github-Delivery found on request')
     
-    if (events && events.indexOf(event) == -1)
+    if (events && events.indexOf(event) === -1)
       return hasError('X-Github-Event is not acceptable')
     
     req.pipe(bl(function(err, data) {

@@ -1,11 +1,11 @@
 # node-github-webhook
-基于Node.js的Github Webhooks工具, 支持设置多个钩子.
+基于Node.js的Github Webhooks工具, 支持设置多个项目。
 
 ## 介绍
 
-这个项目受到[github-webhook-handler](https://github.com/rvagg/github-webhook-handler)启发而来，它支持你为多个仓库同时设置钩子。
+这个库受到[github-webhook-handler](https://github.com/rvagg/github-webhook-handler)启发而来，它支持你为多个仓库同时设置项目。
 
-该项目基于Node.js，能帮你处理所有来自Github的webhooks请求。
+该库基于Node.js，能帮你处理所有来自Github的webhooks请求。
 
 如果你想要了解Github支持的Webhooks事件，请看：[events](https://developer.github.com/webhooks/#events)。
 
@@ -20,11 +20,11 @@
 ```js
 var http = require('http')
 var createHandler = require('node-github-webhook')
-var handler = createHandler([ // 多个钩子
+var handler = createHandler([ // 多个项目
   { path: '/webhook1', secret: 'secret1' },
   { path: '/webhook2', secret: 'secret2' }
 ])
-// var handler = createHandler({ path: '/webhook1', secret: 'secret1' }) // 单个钩子
+// var handler = createHandler({ path: '/webhook1', secret: 'secret1' }) // 单个项目
 
 http.createServer(function (req, res) {
   handler(req, res, function (err) {

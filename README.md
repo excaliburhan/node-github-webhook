@@ -1,11 +1,7 @@
 # node-github-webhook
 Github Webhooks handler based on Node.js. Support multiple handlers.
 
-### Install
-
-`npm install node-github-webhook --save`
-
-### Instructions
+## Instructions
 
 This library is inspired by [github-webhook-handler](https://github.com/rvagg/github-webhook-handler), and it allows you set multiple handlers for different repositories.
 
@@ -15,7 +11,11 @@ If you want to know the events of Github, please see: [events](https://developer
 
 Notice: Github Webhooks setting: `Content-type` must be `application/json`.
 
-### Usage
+## Installation
+
+`npm install node-github-webhook --save`
+
+## Usage
 
 ```js
 var http = require('http')
@@ -54,6 +54,5 @@ handler.on('push', function (event) {
       // do sth else or nothing
       break
   }
-    
 })
 ```
